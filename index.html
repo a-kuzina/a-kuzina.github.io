@@ -6,14 +6,33 @@
 
     </head>
     <body>
-
-        <div id="test"></div>
+        <h1 style="background-color: aliceblue;">ПопытОчка смотрим Ютюб без рилсов</h1>
+        <input id="linkInput" placeholder="Ссылка на видео ютюб">
+        <button onclick="getNewVideo()">save</button>
+        <div id="test" style="border: 1px solid blueviolet;"></div>
 
     </body>
 
     <script>
-        //document.write("<iframe title='YouTube video player' type=\"text/html\" width='640' height='390' src='http://www.youtube.com/embed/W-Q7RMpINVo'frameborder='0' allowFullScreen></iframe>");
-        document.getElementById('test').innerHTML = "<iframe title='YouTube video player'   type=\'text/html\' width='640' height='390' src='http://www.youtube.com/embed/W-Q7RMpINVo' frameborder='0' allowFullScreen></iframe>"
+    
+        let input = document.getElementById('linkInput');
+
+        function getNewVideo(){
+            let link = input.value;
+
+            if(link.indexOf('youtu.be') !== -1){ //https://youtu.be/IiJlBGnH-VU?si=D3DP1ypTvxwQvkk_
+                link = input.value.split('youtu.be');
+                link = "https://www.youtube.com/embed" + link[1]
+            }
+            else if(link.indexOf('watch?v=') !== -1){ //https://www.youtube.com/watch?v=IiJlBGnH-VU
+                link = link.split('watch?v=');
+                link = link[0] + 'embed/' + link[1];
+            }           
+
+            
+            console.log(link);
+            document.getElementById('test').innerHTML = `<iframe title='YouTube video player'  type=\'text/html\' width='640' height='390' src='${link}' frameborder='0' allowFullScreen></iframe>`
+        }
 
     </script>
 </html>
